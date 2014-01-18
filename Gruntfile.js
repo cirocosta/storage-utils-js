@@ -11,9 +11,9 @@
             my_target: {
                 files: [{
                     expand: true,
-                    cwd: '/src',
+                    cwd: 'src/',
                     src: '**/*.js',
-                    dest: '/build',
+                    dest: 'build/',
                     ext: '.min.js'
                 }]
             }
@@ -44,5 +44,6 @@
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('test', ['jshint', 'jasmine']);
+    grunt.registerTask('build', ['uglify']);
     grunt.registerTask('default', ['test']);
 };

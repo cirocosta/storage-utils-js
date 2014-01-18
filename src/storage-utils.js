@@ -1,14 +1,3 @@
-/** CFuncs v0.0.1 - Db Utils
- *   This file contains the basic objects for doing basic ops
- *   with the Database.
- *
- *   Realised under MIT License
- *
- *
- *   //TODO:
- *       - observer pattern for notifyng on change
- */
-
 function DatabaseTable(table_name){
     if(!table_name || (typeof(table_name) === 'undefined')){
         throw "DatabaseTable(table_name) needs a valid name";
@@ -21,10 +10,10 @@ function DatabaseTable(table_name){
 DatabaseTable.prototype.parseDatabaseTable = function(){
     try{
         this.parsed_table = JSON.parse(localStorage[this.table_name]);
-        return this.parsed_table;
     } catch(err){
         this.parsed_table = [];
     }
+    return this.parsed_table;
 };
 
 DatabaseTable.prototype.saveState = function(){
