@@ -1,4 +1,4 @@
-storage-utils
+storage-utils [![Build Status](https://travis-ci.org/cirocosta/storage-utils-js.png?branch=master)](https://travis-ci.org/cirocosta/storage-utils-js)
 ===
 > Facilitator for managing sessionStorage and localStorage
 
