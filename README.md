@@ -4,10 +4,28 @@ storage-utils [![Build Status](https://travis-ci.org/cirocosta/storage-utils-js.
 
 Quickstart
 ---
+Download the `storage-utils.min.js` file at `./build/` and add it to your project.
 
 
 Hacking
 ---
+0.	Clone it
+
+1.	Install the dependencies
+
+```
+npm install
+```
+
+2.	Do your changes to the source code at src/whatever with fancy comments
+
+3.	Test it
+
+```
+npm test
+```
+
+4. Pull Request on GH web interface
 
 
 About
