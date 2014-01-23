@@ -1,6 +1,6 @@
 {
   "name": "storage-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple helper for webstorage",
   "repository": {
     "type": "git",

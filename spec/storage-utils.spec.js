@@ -25,6 +25,16 @@ describe("DatabaseTable", function(){
 			expect(create_table_with_name).not.toThrow();
 		});
 
+		it("should give a localStorage if no type", function(){
+			var db = new DatabaseTable("test");
+			expect(db.storage).toEqual(localStorage);
+		});
+
+		it("should give a sessionStorage if type", function(){
+			var db = new DatabaseTable("test", "session");
+			expect(db.storage).toEqual(sessionStorage);
+		});
+
 		it("should be able to parse", function(){
 			expect(dbTable.parseDatabaseTable()).toBeDefined();
 		});

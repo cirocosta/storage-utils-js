@@ -1,12 +1,15 @@
  module.exports = function(grunt) {
     'use strict';
  
+    var pkg = grunt.file.readJSON('package.json'); 
     var gruntConfig = {
-        pkg: grunt.file.readJSON('package.json'),
-        
+        pkg: pkg,
         uglify: {
             options: {
-                mangle: true
+                mangle: true,
+                banner: '/* <%= pkg.name %> ' +
+                    '- version <%= pkg.version %> - ' +
+                    '<%= grunt.template.today("dd-mm-yyyy") %> */\n'
             },
             my_target: {
                 files: [{
@@ -14,7 +17,7 @@
                     cwd: 'src/',
                     src: '**/*.js',
                     dest: 'build/',
-                    ext: '.min.js'
+                    ext: '-' + pkg.version + '.min.js'
                 }]
             }
         },
