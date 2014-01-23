@@ -1,12 +1,9 @@
-function DatabaseTable(table_name, type){
-    var LOCAL = 1;
-    var SESSION = 2;
-
+function DatabaseTable(table_name, session_storage){
     if(!table_name || (typeof(table_name) === 'undefined')){
         throw "DatabaseTable(table_name) needs a valid name";
     }
 
-    if(typeof(type) === 'undefined'){
+    if (typeof(session_storage) === 'undefined'){
         this.storage = localStorage;
     } else {
         this.storage = sessionStorage;
