@@ -7,7 +7,7 @@ function DatabaseTable(table_name, storage_type){
         throw "DatabaseTable(table_name) needs a valid name";
     }
     if(!storage_type || (typeof(storage_type) === 'undefined')){
-        this.storage_type = 'local'
+        this.storage_type = 'local';
         console.log("DatabaseTable "+table_name+" defined with local storage by default.");
     }else if(storage_type === 'local' || storage_type === 'session'){
         this.storage_type = storage_type;
@@ -29,20 +29,20 @@ DatabaseTable.prototype.parseDatabaseTable = function(){
 };
 
 DatabaseTable.prototype.getFromStorage = function(){
-    if(storage_type === 'local'){
+    if(this.storage_type === 'local'){
         localStorage.getItem(this.table_name);
-    }else if(storage_type === 'session'){
+    }else if(this.storage_type === 'session'){
         sessionStorage.getItem(this.table_name);
     }
-}
+};
 
 DatabaseTable.prototype.setInStorage = function(value){
-    if(storage_type === 'local'){
+    if(this.storage_type === 'local'){
         localStorage.setItem(this.table_name, value);
-    }else if(storage_type === 'session'){
+    }else if(this.storage_type === 'session'){
         sessionStorage.setItem(this.table_name, value);
     }
-}
+};
 
 DatabaseTable.prototype.saveState = function(){
     var stringParsedTable = JSON.stringify(this.parsed_table);

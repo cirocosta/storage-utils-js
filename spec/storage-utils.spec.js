@@ -25,6 +25,27 @@ describe("DatabaseTable", function(){
 			expect(create_table_with_name).not.toThrow();
 		});
 
+		it("must fail if initialized with not known storage type", function(){
+			var create_table_with_invalid_storage_type = function(){
+				new DatabaseTable('table_name', 'strange_stoge_type');
+			};
+			expect(create_table_with_invalid_storage_type).toThrow();
+		});
+
+		it("should not fail if storage is local", function(){
+			var create_table_with_stoge_type_local = function(){
+				new DatabaseTable('table_name', 'local');
+			};
+			expect(create_table_with_stoge_type_local).not.toThrow();
+		});
+
+		it("should not fail if storage is session", function(){
+			var create_table_with_stoge_type_session = function(){
+				new DatabaseTable('table_name', 'session');
+			};
+			expect(create_table_with_stoge_type_session).not.toThrow();
+		});
+
 		it("should be able to parse", function(){
 			expect(dbTable.parseDatabaseTable()).toBeDefined();
 		});
