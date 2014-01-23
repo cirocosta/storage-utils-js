@@ -1,7 +1,17 @@
-function DatabaseTable(table_name){
+function DatabaseTable(table_name, type){
+    var LOCAL = 1;
+    var SESSION = 2;
+
     if(!table_name || (typeof(table_name) === 'undefined')){
         throw "DatabaseTable(table_name) needs a valid name";
     }
+
+    if(typeof(type) === 'undefined'){
+        this.storage = localStorage;
+    } else {
+        this.storage = sessionStorage;
+    }
+
     this.table_name = table_name; 
     this.parsed_table  = null;
     this.parseDatabaseTable();
@@ -9,7 +19,7 @@ function DatabaseTable(table_name){
 
 DatabaseTable.prototype.parseDatabaseTable = function(){
     try{
-        this.parsed_table = JSON.parse(localStorage[this.table_name]);
+        this.parsed_table = JSON.parse(this.storage[this.table_name]);
     } catch(err){
         this.parsed_table = [];
     }
@@ -17,7 +27,7 @@ DatabaseTable.prototype.parseDatabaseTable = function(){
 };
 
 DatabaseTable.prototype.saveState = function(){
-    localStorage[this.table_name] = JSON.stringify(this.parsed_table);
+    this.storage[this.table_name] = JSON.stringify(this.parsed_table);
 };
 
 DatabaseTable.prototype.deleteObjectFromPosition = function(position){
