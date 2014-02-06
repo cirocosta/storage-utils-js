@@ -46,20 +46,29 @@ describe("DatabaseTable", function(){
 
 	describe("If performing CRUD", function(){
 		
-		describe("when putting",function(){
-			it("should store a string", function(){
+		describe("when putting",function() {
+			it("should store a string", function() {
 				dbTable.putObject("element");
 				expect(dbTable.parsed_table).toContain("element");
 				expect(dbTable.parsed_table.length).not.toEqual(0);
 			});
 
-			it("should store any object", function(){
+			it("should store any object", function() {
 				dbTable.putObject(stub_obj);
 				expect(dbTable.parsed_table).toContain(stub_obj);
 				expect(dbTable.parsed_table.length).not.toEqual(0);
 			});
-		});
 
+			it("should return the object that was inserted", function() { 
+				var object_put = dbTable.putObject(stub_obj);
+				expect(object_put).toEqual(stub_obj);
+			});
+
+			it("should add a time id if no id specified", function() {
+				var object = dbTable.putObject(stub_obj, false);
+				expect(object._id).toBeDefined();
+			});
+		});
 
 		describe("when removing", function(){
 			it("should stay empty if empty", function(){
