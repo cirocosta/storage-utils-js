@@ -79,13 +79,23 @@ DatabaseTable.prototype.getObjectPosition = function(object){
     return -1;
 };
 
-DatabaseTable.prototype.putObject = function(object_to_save){
-    var saved_obj = this.parsed_table.push(object_to_save);
+/*  Puts an object into the database. 
+    args:
+        object_to_save -- the object to be put
+        no_id -- (bool) true if it shouldn't add an default id
+*/
+
+DatabaseTable.prototype.putObject = function(object_to_save, no_id) {
+    var _id = null;
+    if(typeof(no_id) === 'undefined' || no_id === false) {
+        object_to_save._id = new Date().getTime();
+    }
+    this.parsed_table.push(object_to_save);
     this.saveState();
-    return saved_obj;
+    return object_to_save;
 };
 
-DatabaseTable.prototype.updateObject = function(object_to_update){
+DatabaseTable.prototype.updateObject = function(object_to_update) {
     if(this.parsed_table){
         if(typeof(object_to_update) !== 'undefined'){
             var obj_index = this.getObjectPosition(object_to_update);
