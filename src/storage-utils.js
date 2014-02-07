@@ -11,10 +11,10 @@ function DatabaseTable(table_name, session_storage){
 
     this.table_name = table_name; 
     this.parsed_table  = null;
-    this.parseDatabaseTable();
+    this._parseDatabaseTable();
 }
 
-DatabaseTable.prototype.parseDatabaseTable = function(){
+DatabaseTable.prototype._parseDatabaseTable = function(){
     try{
         this.parsed_table = JSON.parse(this.storage[this.table_name]);
     } catch(err){
@@ -23,7 +23,7 @@ DatabaseTable.prototype.parseDatabaseTable = function(){
     return this.parsed_table;
 };
 
-DatabaseTable.prototype.saveState = function(){
+DatabaseTable.prototype._saveState = function(){
     this.storage[this.table_name] = JSON.stringify(this.parsed_table);
 };
 
@@ -31,7 +31,7 @@ DatabaseTable.prototype.deleteObjectFromPosition = function(position){
     if(this.parsed_table){
         if(position > -1){
             this.parsed_table.splice(position,1);
-            this.saveState();
+            this._saveState();
             return true;
         }
     }
@@ -79,19 +79,13 @@ DatabaseTable.prototype.getObjectPosition = function(object){
     return -1;
 };
 
-/*  Puts an object into the database. 
-    args:
-        object_to_save -- the object to be put
-        no_id -- (bool) true if it shouldn't add an default id
-*/
-
 DatabaseTable.prototype.putObject = function(object_to_save, no_id) {
     var _id = null;
     if(typeof(no_id) === 'undefined' || no_id === false) {
         object_to_save._id = new Date().getTime();
     }
     this.parsed_table.push(object_to_save);
-    this.saveState();
+    this._saveState();
     return object_to_save;
 };
 
@@ -101,7 +95,7 @@ DatabaseTable.prototype.updateObject = function(object_to_update) {
             var obj_index = this.getObjectPosition(object_to_update);
             if(obj_index > -1){
                 this.parsed_table[obj_index] = object_to_update;
-                this.saveState();
+                this._saveState();
                 return true;
             }
             return false;
@@ -109,4 +103,10 @@ DatabaseTable.prototype.updateObject = function(object_to_update) {
         return false;
     }
     return this.putObject(object_to_update);
+};
+
+DatabaseTable.prototype.getAll = function() {
+    if (this.parsed_table) {
+        return this.parsed_table;
+    }
 };
