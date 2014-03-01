@@ -1,0 +1,22 @@
+{
+  "name": "storage-utils-js",
+  "version": "0.0.3",
+  "homepage": "https://github.com/cirocosta/storage-utils-js",
+  "authors": [
+    "Ciro S. Costa <ciro.costa@usp.br>"
+  ],
+  "description": "Simple helper for webstorage",
+  "main": "src/storage-utils.js",
+  "keywords": [
+    "webstorage",
+    "javascript",
+    "web"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "spec"
+  ]
+}
